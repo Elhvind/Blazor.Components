@@ -55,6 +55,17 @@
                         </td>
                     }
                 </tr>
+                @if (this.RowDetailsTemplate != null)
+                {
+                    <tr class="d-none">
+                        <td colspan="@this.Columns.Count()"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="@this.Columns.Count()">
+                            @this.RowDetailsTemplate(item)
+                        </td>
+                    </tr>
+                }
             }
         </TBody>
     }

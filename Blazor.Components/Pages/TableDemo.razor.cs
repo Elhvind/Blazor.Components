@@ -13,6 +13,11 @@ namespace Blazor.Components.Pages
 
         protected List<TestObject> Data { get; set; }
 
+        protected bool Hoverable { get; set; }
+        protected bool Striped { get; set; }
+        protected bool Bordered { get; set; }
+        protected bool Borderless { get; set; }
+
         protected override void OnInitialized()
         {
             this.Data = new List<TestObject>

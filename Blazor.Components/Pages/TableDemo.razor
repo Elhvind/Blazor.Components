@@ -4,10 +4,30 @@
     <Heading Level="HeadingLevel.H1" class="text-truncate">
         Table Demo
     </Heading>
-    <Table TItem="TestObject" Data="this.Data">
+
+    <ButtonGroup MarginBottom="Spacing.S3">
+        <input type="checkbox" class="btn-check" id="btnHoverable" autocomplete="off" @bind-value="this.Hoverable">
+        <label class="btn btn-outline-primary" for="btnHoverable">Hoverable 1</label>
+
+        <input type="checkbox" class="btn-check" id="btnStriped" autocomplete="off" @bind-value="this.Striped">
+        <label class="btn btn-outline-primary" for="btnStriped">Striped</label>
+
+        <input type="checkbox" class="btn-check" id="btnBordered" autocomplete="off" @bind-value="this.Bordered">
+        <label class="btn btn-outline-primary" for="btnBordered">Bordered</label>
+
+        <input type="checkbox" class="btn-check" id="btnBorderless" autocomplete="off" @bind-value="this.Borderless">
+        <label class="btn btn-outline-primary" for="btnBorderless">Borderless</label>
+    </ButtonGroup>
+
+    <Table TItem="TestObject" Data="this.Data"
+           Hoverable="this.Hoverable"
+           Striped="this.Striped"
+           Bordered="this.Bordered"
+           Borderless="this.Borderless">
         <ChildContent>
             <TableColumn TItem="TestObject" Title="String" Property="x => x.StringProp"></TableColumn>
             <TableColumn TItem="TestObject" Title="Int" Property="x => x.IntProp.ToString()"></TableColumn>
+            <TableColumn TItem="TestObject" Title="Double" Property="x => x.DoubleProp.ToString()"></TableColumn>
             <TableColumn TItem="TestObject" Title="DateTime" Property="x => x.DateTimeProp.ToString()" Context="colItem">
                 <BodyTemplate>
                     <Badge Color="NamedColor.Primary">
@@ -16,5 +36,13 @@
                 </BodyTemplate>
             </TableColumn>
         </ChildContent>
+        <RowDetailsTemplate Context="rowItem">
+            <Card Margin="Spacing.S0">
+                <p>@rowItem.StringProp</p>
+                <p>@rowItem.IntProp</p>
+                <p>@rowItem.DoubleProp</p>
+                <p>@rowItem.DateTimeProp</p>
+            </Card>
+        </RowDetailsTemplate>
     </Table>
 </div>

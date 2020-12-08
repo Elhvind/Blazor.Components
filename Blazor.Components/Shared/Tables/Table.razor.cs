@@ -23,6 +23,9 @@ namespace Blazor.Components.Shared.Tables
         public IEnumerable<TItem> Data { get; set; }
 
         [Parameter]
+        public string Footer { get; set; }
+
+        [Parameter]
         public RenderFragment TableHeaderTemplate { get; set; }
 
         [Parameter]
@@ -32,7 +35,7 @@ namespace Blazor.Components.Shared.Tables
         public RenderFragment<string> TableFooterTemplate { get; set; }
 
         [Parameter]
-        public string Footer { get; set; }
+        public RenderFragment<TItem> RowDetailsTemplate { get; set; }
 
         /// <summary>
         /// The size of the table. Defaults to <see cref="TableSize.Normal"/>.
