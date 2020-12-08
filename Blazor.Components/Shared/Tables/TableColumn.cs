@@ -30,7 +30,10 @@ namespace Blazor.Components.Shared.Tables
         public Func<TItem, string> Property { get; set; }
 
         [Parameter]
-        public RenderFragment<TItem> ItemTemplate { get; set; }
+        public RenderFragment<string> HeaderTemplate { get; set; }
+
+        [Parameter]
+        public RenderFragment<TItem> BodyTemplate { get; set; }
 
         [CascadingParameter]
         protected Table<TItem> Table { get; set; }

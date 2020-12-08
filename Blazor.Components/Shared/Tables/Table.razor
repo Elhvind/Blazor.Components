@@ -17,7 +17,14 @@
                 @foreach (var col in this.Columns)
                 {
                     <th>
-                        @col.Title
+                        @if (col.HeaderTemplate != null)
+                        {
+                            @col.HeaderTemplate(col.Title)
+                        }
+                        else
+                        {
+                            @col.Title
+                        }
                     </th>
                 }
             </tr>
@@ -37,9 +44,9 @@
                     @foreach (var col in this.Columns)
                     {
                         <td @attributes="col.Attributes">
-                            @if (col.ItemTemplate != null)
+                            @if (col.BodyTemplate != null)
                             {
-                                @col.ItemTemplate(item)
+                                @col.BodyTemplate(item)
                             }
                             else
                             {

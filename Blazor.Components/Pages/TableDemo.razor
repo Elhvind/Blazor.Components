@@ -9,11 +9,11 @@
             <TableColumn TItem="TestObject" Title="String" Property="x => x.StringProp"></TableColumn>
             <TableColumn TItem="TestObject" Title="Int" Property="x => x.IntProp.ToString()"></TableColumn>
             <TableColumn TItem="TestObject" Title="DateTime" Property="x => x.DateTimeProp.ToString()" Context="colItem">
-                <ItemTemplate>
+                <BodyTemplate>
                     <Badge Color="NamedColor.Primary">
                         @colItem.DateTimeProp.ToString()
                     </Badge>
-                </ItemTemplate>
+                </BodyTemplate>
             </TableColumn>
         </ChildContent>
     </Table>
