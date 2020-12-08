@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
-using Blazor.Data;
 
 namespace Blazor.Components.Shared.Tables
 {
@@ -8,7 +7,7 @@ namespace Blazor.Components.Shared.Tables
     {
         public Table()
         {
-            this.Columns = new TableColumn<TItem>[0];
+            this.Columns = new List<TableColumn<TItem>>();
             this.Data = new TItem[0];
             this.Size = TableSize.Normal;
             this.Bordered = false;
@@ -73,8 +72,6 @@ namespace Blazor.Components.Shared.Tables
 
         protected override void OnParametersSet()
         {
-            var test = new TestObject();
-
             this.AddClasses("table");
 
             if (this.Size == TableSize.Small)
@@ -101,6 +98,11 @@ namespace Blazor.Components.Shared.Tables
         public void AddColumn(TableColumn<TItem> col)
         {
             this.Columns.Add(col);
+        }
+
+        public void RemoveColumn(TableColumn<TItem> col)
+        {
+            this.Columns.Remove(col);
         }
     }
 

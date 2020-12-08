@@ -1,6 +1,10 @@
 ﻿@inherits ColoredBootstrapComponentBase
 @typeparam TItem
 
+<CascadingValue Value="this">
+    @ChildContent
+</CascadingValue>
+
 <table @attributes=Attributes>
     @if (this.TableHeaderTemplate != null)
     {
@@ -20,35 +24,33 @@
         </THead>
     }
 
-    <CascadingValue Value="this">
-        @if (this.TableBodyTemplate != null)
-        {
-            @this.TableBodyTemplate;
-        }
-        else
-        {
-            <TBody>
-                @foreach (var item in this.Data)
-                {
-                    <tr>
-                        @foreach (var col in this.Columns)
-                        {
-                            <td @attributes="col.Attributes">
-                                @if (col.ItemTemplate != null)
-                                {
-                                    @col.ItemTemplate(item)
-                                }
-                                else
-                                {
-                                    @col.Property(item)
-                                }
-                            </td>
-                        }
-                    </tr>
-                }
-            </TBody>
-        }
-    </CascadingValue>
+    @if (this.TableBodyTemplate != null)
+    {
+        @this.TableBodyTemplate;
+    }
+    else
+    {
+        <TBody>
+            @foreach (var item in this.Data)
+            {
+                <tr>
+                    @foreach (var col in this.Columns)
+                    {
+                        <td @attributes="col.Attributes">
+                            @if (col.ItemTemplate != null)
+                            {
+                                @col.ItemTemplate(item)
+                            }
+                            else
+                            {
+                                @col.Property(item)
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+        </TBody>
+    }
 
     @if (this.TableFooterTemplate != null)
     {

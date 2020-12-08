@@ -5,18 +5,16 @@ using System.Collections.Generic;
 
 namespace Blazor.Components.Shared.Tables
 {
-    public class TableColumn<TItem> : BootstrapComponentBase where TItem : new()
+    public class TableColumn<TItem> : BootstrapComponentBase, IDisposable where TItem : new()
     {
         public TableColumn()
         {
         }
 
-        public TableColumn(string title, Func<TItem, string> property, IComparer<TItem> comparer)
+        public TableColumn(string title, Func<TItem, string> property)
         {
             this.Title = title;
-            this.Sortable = true;
             this.Property = property;
-            this.Comparer = comparer;
         }
 
         [Parameter]
@@ -41,7 +39,24 @@ namespace Blazor.Components.Shared.Tables
         {
             this.Table?.AddColumn(this);
 
+            if (this.Sortable && this.Comparer == null)
+                this.Comparer = Comparer<TItem>.Create((a, b) => this.Property(a).CompareTo(this.Property(b)));
+
             base.OnInitialized();
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                this.Table?.RemoveColumn(this);
+            }
         }
     }
 }

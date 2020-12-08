@@ -1,4 +1,5 @@
 ﻿using Blazor.Data;
+using System;
 using System.Collections.Generic;
 
 namespace Blazor.Components.Pages
@@ -18,15 +19,21 @@ namespace Blazor.Components.Pages
             {
                 new TestObject
                 {
-                    StringProp="String 1"
+                    StringProp = "String 1",
+                    IntProp = 1,
+                    DateTimeProp = DateTime.Now.AddDays(-1)
                 },
                 new TestObject
                 {
-                    StringProp="String 2"
+                    StringProp = "String 2",
+                    IntProp = 2,
+                    DateTimeProp = DateTime.Now.AddDays(-2)
                 },
                 new TestObject
                 {
-                    StringProp="String 3"
+                    StringProp = "String 3",
+                    IntProp = 3,
+                    DateTimeProp = DateTime.Now.AddDays(-3)
                 }
             };
 
