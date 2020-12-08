@@ -1,0 +1,24 @@
+﻿@inherits ColoredBootstrapComponentBase
+
+<table @attributes=Attributes>
+    @if (this.TableHeaderTemplate != null)
+    {
+        @this.TableHeaderTemplate;
+    }
+
+    @if (this.TableBodyTemplate != null)
+    {
+        @this.TableBodyTemplate;
+    }
+    else
+    {
+        <TBody>
+            @ChildContent
+        </TBody>
+    }
+
+    @if (this.TableFooterTemplate != null)
+    {
+        @this.TableFooterTemplate;
+    }
+</table>
