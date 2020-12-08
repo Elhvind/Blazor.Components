@@ -1,18 +1,17 @@
 ﻿using Blazorade.Bootstrap.Components;
 using Microsoft.AspNetCore.Components;
-using MST.VanDa.DataUd.Common.Model;
 using System;
 using System.Collections.Generic;
 
 namespace Blazor.Components.Shared.Tables
 {
-    public class TableColumn : BootstrapComponentBase
+    public class TableColumn<TItem> : BootstrapComponentBase where TItem : new()
     {
         public TableColumn()
         {
         }
 
-        public TableColumn(string title, Func<Measurement, string> property, IComparer<Measurement> comparer)
+        public TableColumn(string title, Func<TItem, string> property, IComparer<TItem> comparer)
         {
             this.Title = title;
             this.Sortable = true;
@@ -20,15 +19,29 @@ namespace Blazor.Components.Shared.Tables
             this.Comparer = comparer;
         }
 
+        [Parameter]
         public string Title { get; set; }
 
+        [Parameter]
         public bool Sortable { get; set; }
 
-        public IComparer<Measurement> Comparer { get; set; }
-
-        public Func<Measurement, string> Property { get; set; }
+        [Parameter]
+        public IComparer<TItem> Comparer { get; set; }
 
         [Parameter]
-        public RenderFragment<Measurement> ItemTemplate { get; set; }
+        public Func<TItem, string> Property { get; set; }
+
+        [Parameter]
+        public RenderFragment<TItem> ItemTemplate { get; set; }
+
+        [CascadingParameter]
+        protected Table<TItem> Table { get; set; }
+
+        protected override void OnInitialized()
+        {
+            this.Table?.AddColumn(this);
+
+            base.OnInitialized();
+        }
     }
 }

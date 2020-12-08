@@ -1,11 +1,15 @@
 ﻿using Microsoft.AspNetCore.Components;
+using System.Collections.Generic;
+using Blazor.Data;
 
 namespace Blazor.Components.Shared.Tables
 {
-    public partial class Table
+    public partial class Table<TItem> where TItem : new()
     {
         public Table()
         {
+            this.Columns = new TableColumn<TItem>[0];
+            this.Data = new TItem[0];
             this.Size = TableSize.Normal;
             this.Bordered = false;
             this.Borderless = false;
@@ -14,6 +18,11 @@ namespace Blazor.Components.Shared.Tables
             this.Responsive = false;
         }
 
+        public IList<TableColumn<TItem>> Columns { get; set; }
+
+        [Parameter]
+        public IEnumerable<TItem> Data { get; set; }
+
         [Parameter]
         public RenderFragment TableHeaderTemplate { get; set; }
 
@@ -21,7 +30,10 @@ namespace Blazor.Components.Shared.Tables
         public RenderFragment TableBodyTemplate { get; set; }
 
         [Parameter]
-        public RenderFragment TableFooterTemplate { get; set; }
+        public RenderFragment<string> TableFooterTemplate { get; set; }
+
+        [Parameter]
+        public string Footer { get; set; }
 
         /// <summary>
         /// The size of the table. Defaults to <see cref="TableSize.Normal"/>.
@@ -61,6 +73,8 @@ namespace Blazor.Components.Shared.Tables
 
         protected override void OnParametersSet()
         {
+            var test = new TestObject();
+
             this.AddClasses("table");
 
             if (this.Size == TableSize.Small)
@@ -82,6 +96,11 @@ namespace Blazor.Components.Shared.Tables
                 this.AddClasses("table-responsive");
 
             base.OnParametersSet();
+        }
+
+        public void AddColumn(TableColumn<TItem> col)
+        {
+            this.Columns.Add(col);
         }
     }
 

@@ -1,24 +1,67 @@
 ﻿@inherits ColoredBootstrapComponentBase
+@typeparam TItem
 
 <table @attributes=Attributes>
     @if (this.TableHeaderTemplate != null)
     {
         @this.TableHeaderTemplate;
     }
-
-    @if (this.TableBodyTemplate != null)
-    {
-        @this.TableBodyTemplate;
-    }
     else
     {
-        <TBody>
-            @ChildContent
-        </TBody>
+        <THead>
+            <tr>
+                @foreach (var col in this.Columns)
+                {
+                    <th>
+                        @col.Title
+                    </th>
+                }
+            </tr>
+        </THead>
     }
+
+    <CascadingValue Value="this">
+        @if (this.TableBodyTemplate != null)
+        {
+            @this.TableBodyTemplate;
+        }
+        else
+        {
+            <TBody>
+                @foreach (var item in this.Data)
+                {
+                    <tr>
+                        @foreach (var col in this.Columns)
+                        {
+                            <td @attributes="col.Attributes">
+                                @if (col.ItemTemplate != null)
+                                {
+                                    @col.ItemTemplate(item)
+                                }
+                                else
+                                {
+                                    @col.Property(item)
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+            </TBody>
+        }
+    </CascadingValue>
 
     @if (this.TableFooterTemplate != null)
     {
-        @this.TableFooterTemplate;
+        @this.TableFooterTemplate(this.Footer);
+    }
+    else if (!string.IsNullOrEmpty(this.Footer))
+    {
+        <TFoot>
+            <tr>
+                <td colspan="@this.Columns.Count()">
+                    @this.Footer
+                </td>
+            </tr>
+        </TFoot>
     }
 </table>

@@ -1,0 +1,10 @@
+﻿@page "/demo/table"
+
+<div>
+    <Heading Level="HeadingLevel.H1" class="text-truncate">
+        Table Demo
+    </Heading>
+    <Table TItem="TestObject">
+        <TableColumn TItem="TestObject" Title="String" Property="x => x.StringProp"></TableColumn>
+    </Table>
+</div>
