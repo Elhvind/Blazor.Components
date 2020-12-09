@@ -7,6 +7,7 @@ namespace Blazor.Components.Shared.Tables
     {
         public Table()
         {
+            this.CurrentPage = 1;
             this.Columns = new List<TableColumn<TItem>>();
             this.Data = new TItem[0];
             this.Size = TableSize.Normal;
@@ -36,6 +37,12 @@ namespace Blazor.Components.Shared.Tables
 
         [Parameter]
         public RenderFragment<TItem> RowDetailsTemplate { get; set; }
+
+        [Parameter]
+        public int CurrentPage { get; set; }
+
+        [Parameter]
+        public int? PerPage { get; set; }
 
         /// <summary>
         /// The size of the table. Defaults to <see cref="TableSize.Normal"/>.

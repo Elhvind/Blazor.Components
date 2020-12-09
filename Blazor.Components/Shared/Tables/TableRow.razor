@@ -1,0 +1,29 @@
+﻿@inherits BootstrapComponentBase
+@typeparam TItem
+
+<tr @attributes=Attributes>
+    @foreach (var col in this.Columns)
+    {
+        <td @attributes="col.Attributes">
+            @if (col.BodyTemplate != null)
+            {
+                @col.BodyTemplate(Item)
+            }
+            else
+            {
+                @col.Property(Item)
+            }
+        </td>
+    }
+</tr>
+@if (!this.Collapsed && this.RowDetailsTemplate != null)
+{
+    <tr class="d-none">
+        <td colspan="@this.Columns.Count()"></td>
+    </tr>
+    <tr>
+        <td colspan="@this.Columns.Count()">
+            @this.RowDetailsTemplate(Item)
+        </td>
+    </tr>
+}

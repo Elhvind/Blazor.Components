@@ -40,32 +40,7 @@
         <TBody>
             @foreach (var item in this.Data)
             {
-                <tr>
-                    @foreach (var col in this.Columns)
-                    {
-                        <td @attributes="col.Attributes">
-                            @if (col.BodyTemplate != null)
-                            {
-                                @col.BodyTemplate(item)
-                            }
-                            else
-                            {
-                                @col.Property(item)
-                            }
-                        </td>
-                    }
-                </tr>
-                @if (this.RowDetailsTemplate != null)
-                {
-                    <tr class="d-none">
-                        <td colspan="@this.Columns.Count()"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="@this.Columns.Count()">
-                            @this.RowDetailsTemplate(item)
-                        </td>
-                    </tr>
-                }
+                <TableRow TItem="TItem" Item="item" RowDetailsTemplate="this.RowDetailsTemplate" Columns="this.Columns" />
             }
         </TBody>
     }
