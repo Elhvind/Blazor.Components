@@ -5,19 +5,24 @@
         Table Demo
     </Heading>
 
-    <ButtonGroup MarginBottom="Spacing.S3">
-        <input type="checkbox" class="btn-check" id="btnHoverable" autocomplete="off" @bind-value="this.Hoverable">
-        <label class="btn btn-outline-primary" for="btnHoverable">Hoverable 1</label>
-
-        <input type="checkbox" class="btn-check" id="btnStriped" autocomplete="off" @bind-value="this.Striped">
-        <label class="btn btn-outline-primary" for="btnStriped">Striped</label>
-
-        <input type="checkbox" class="btn-check" id="btnBordered" autocomplete="off" @bind-value="this.Bordered">
-        <label class="btn btn-outline-primary" for="btnBordered">Bordered</label>
-
-        <input type="checkbox" class="btn-check" id="btnBorderless" autocomplete="off" @bind-value="this.Borderless">
-        <label class="btn btn-outline-primary" for="btnBorderless">Borderless</label>
-    </ButtonGroup>
+    <div class="mb-3">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="checkHoverable" @bind-value="this.Hoverable">
+            <label class="custom-control-label" for="checkHoverable">Hoverable</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="checkStriped" @bind-value="this.Striped">
+            <label class="custom-control-label" for="checkStriped">Striped</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="checkBordered" @bind-value="this.Bordered">
+            <label class="custom-control-label" for="checkBordered">Bordered</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="checkBorderless" @bind-value="this.Borderless">
+            <label class="custom-control-label" for="checkBorderless">Borderless</label>
+        </div>
+    </div>
 
     <Table TItem="TestObject" Data="this.Data"
            Hoverable="this.Hoverable"
@@ -25,9 +30,9 @@
            Bordered="this.Bordered"
            Borderless="this.Borderless">
         <ChildContent>
-            <TableColumn TItem="TestObject" Title="String" Property="x => x.StringProp"></TableColumn>
-            <TableColumn TItem="TestObject" Title="Int" Property="x => x.IntProp.ToString()"></TableColumn>
-            <TableColumn TItem="TestObject" Title="Double" Property="x => x.DoubleProp.ToString()"></TableColumn>
+            <TableColumn TItem="TestObject" Title="String" Property="x => x.StringProp" />
+            <TableColumn TItem="TestObject" Title="Int" Property="x => x.IntProp.ToString()" />
+            <TableColumn TItem="TestObject" Title="Double" Property="x => x.DoubleProp.ToString()" />
             <TableColumn TItem="TestObject" Title="DateTime" Property="x => x.DateTimeProp.ToString()" Context="colItem">
                 <BodyTemplate>
                     <Badge Color="NamedColor.Primary">
